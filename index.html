@@ -136,6 +136,11 @@
             50% { transform: scale(1.2); opacity: 1; }
         }
 
+        @keyframes kaleidoscope-spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
         @keyframes roll-in-char {
             0% {
                 opacity: 0;
@@ -311,51 +316,57 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: #3a7bd5; /* Lighter blue base */
+            background: #000;
             animation: orb-pulse 3s infinite ease-in-out;
             position: relative;
             z-index: 2;
-            box-shadow: 0 0 40px 10px rgba(100, 217, 255, 0.6);
+            box-shadow: 0 0 40px 10px rgba(121, 40, 202, 0.6);
             transition: box-shadow 0.3s;
-            overflow: hidden; /* Important for containing pseudo-elements */
+            overflow: hidden;
         }
 
         .ai-orb::before, .ai-orb::after {
             content: '';
             position: absolute;
-            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            border-radius: 40%;
         }
 
-        /* Inner glowing core */
         .ai-orb::before {
-            width: 40%;
-            height: 40%;
-            top: 30%;
-            left: 30%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(173, 216, 230, 0.5) 60%, transparent 100%);
-            filter: blur(10px);
-            animation: core-pulse 4s ease-in-out infinite;
+            background: repeating-conic-gradient(
+                from 0deg,
+                #ff0080 0deg 20deg,
+                #7928ca 20deg 40deg,
+                #0070f3 40deg 60deg,
+                #00ffcc 60deg 80deg,
+                #ff0080 80deg 100deg
+            );
+            mix-blend-mode: screen;
+            animation: kaleidoscope-spin 10s linear infinite;
         }
 
-        /* Shifting plasma/haze layer */
         .ai-orb::after {
-            width: 150%;
-            height: 150%;
-            top: -25%;
-            left: -25%;
-            background: radial-gradient(circle at 30% 40%, #89f7fe 10%, transparent 50%),
-                        radial-gradient(circle at 70% 60%, #66a6ff 10%, transparent 50%);
-            filter: blur(15px);
-            opacity: 0.8; /* Increased opacity */
-            animation: plasma-shift 8s ease-in-out infinite;
+            background: repeating-conic-gradient(
+                from 0deg,
+                #00ffcc 0deg 20deg,
+                #0070f3 20deg 40deg,
+                #7928ca 40deg 60deg,
+                #ff0080 60deg 80deg,
+                #00ffcc 80deg 100deg
+            );
+            mix-blend-mode: overlay;
+            animation: kaleidoscope-spin 15s linear infinite reverse;
         }
 
         .ai-orb:hover {
-            box-shadow: 0 0 50px 15px rgba(100, 217, 255, 0.8);
+            box-shadow: 0 0 60px 20px rgba(121, 40, 202, 0.8);
         }
 
         .ai-orb.active {
-            box-shadow: 0 0 60px 20px rgba(100, 217, 255, 0.9);
+            box-shadow: 0 0 70px 25px rgba(121, 40, 202, 0.9);
             animation: orb-pulse 3s infinite ease-in-out, rainbow-glow-active 3s infinite linear;
         }
 
@@ -531,7 +542,7 @@
         }
 
         .footer-links a {
-            color: var(--text-secondary);
+            color: white;
             text-decoration: none;
             margin: 0 10px;
             transition: color 0.3s;
@@ -663,7 +674,7 @@
                 <a href="javascript:void(0);" id="termsLink">Terms & Conditions</a>
                 <a href="javascript:void(0);" id="privacyLink">Privacy Policy</a>
             </div>
-            <p style="margin-top: 20px;">&copy; 2024 Friend.ai. All rights reserved.</p>
+            <p style="margin-top: 20px;">&copy; 2025 Friend.ai. All rights reserved.</p>
         </div>
         <div class="waves-container">
             <svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -742,7 +753,7 @@
                 
                 lineDiv.style.animation = `
                     typing ${typingDuration}s steps(${line.length}, end) forwards,
-                    blink-caret ${blinkDuration}s step-end ${blinkCount}
+                    blink-caret ${blinkDuration}s step-end ${blinkCount} forwards
                 `;
                 lineDiv.style.animationDelay = `${typingDelay}s`;
 
