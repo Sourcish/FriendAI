@@ -9,8 +9,8 @@
             --bg: #ffffff;
             --text-primary: #000000;
             --text-secondary: #666666;
-            --accent: #6d28d9; /* Deep Purple */
-            --accent-glow: #8b5cf6; /* Light Purple */
+            --accent: #6d28d9;
+            --accent-glow: #8b5cf6;
             --glass: rgba(0, 0, 0, 0.05);
             --glass-border: rgba(0, 0, 0, 0.1);
         }
@@ -29,10 +29,15 @@
         }
 
         /* --- Animations --- */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes aurora-shift {
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
         }
 
         @keyframes pulse-ring {
@@ -40,15 +45,132 @@
             100% { transform: scale(2.5); opacity: 0; }
         }
 
-        @keyframes orb-breathe {
-            0% { box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent-glow); transform: scale(1); }
-            50% { box-shadow: 0 0 40px var(--accent), 0 0 80px var(--accent-glow); transform: scale(1.05); }
-            100% { box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent-glow); transform: scale(1); }
+        @keyframes orb-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
         }
 
-        @keyframes fade-in-up {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes rainbow-glow {
+            0% { box-shadow: 0 0 40px 10px rgba(255, 0, 127, 0.6); }
+            16.66% { box-shadow: 0 0 40px 10px rgba(255, 0, 255, 0.6); }
+            33.33% { box-shadow: 0 0 40px 10px rgba(0, 127, 255, 0.6); }
+            50% { box-shadow: 0 0 40px 10px rgba(0, 255, 127, 0.6); }
+            66.66% { box-shadow: 0 0 40px 10px rgba(255, 255, 0, 0.6); }
+            83.33% { box-shadow: 0 0 40px 10px rgba(255, 127, 0, 0.6); }
+            100% { box-shadow: 0 0 40px 10px rgba(255, 0, 127, 0.6); }
+        }
+
+        @keyframes rainbow-glow-active {
+            0% { box-shadow: 0 0 60px 20px rgba(255, 0, 127, 0.9); }
+            16.66% { box-shadow: 0 0 60px 20px rgba(255, 0, 255, 0.9); }
+            33.33% { box-shadow: 0 0 60px 20px rgba(0, 127, 255, 0.9); }
+            50% { box-shadow: 0 0 60px 20px rgba(0, 255, 127, 0.9); }
+            66.66% { box-shadow: 0 0 60px 20px rgba(255, 255, 0, 0.9); }
+            83.33% { box-shadow: 0 0 60px 20px rgba(255, 127, 0, 0.9); }
+            100% { box-shadow: 0 0 60px 20px rgba(255, 0, 127, 0.9); }
+        }
+
+        @keyframes rainbow-ring {
+            0% { border-color: rgba(255, 0, 127, 0.8); }
+            16.66% { border-color: rgba(255, 0, 255, 0.8); }
+            33.33% { border-color: rgba(0, 127, 255, 0.8); }
+            50% { border-color: rgba(0, 255, 127, 0.8); }
+            66.66% { border-color: rgba(255, 255, 0, 0.8); }
+            83.33% { border-color: rgba(255, 127, 0, 0.8); }
+            100% { border-color: rgba(255, 0, 127, 0.8); }
+        }
+
+        @keyframes morphInAdvanced {
+            0% {
+                transform: translateX(-50%) scale(0) rotateY(90deg);
+                opacity: 0;
+                filter: blur(10px);
+            }
+            50% { filter: blur(5px); }
+            100% {
+                transform: translateX(-50%) scale(1) rotateY(0deg);
+                opacity: 1;
+                filter: blur(0px);
+            }
+        }
+
+        @keyframes morphOut {
+            0% {
+                transform: translateX(-50%) scale(1) rotateY(0deg);
+                opacity: 1;
+                filter: blur(0px);
+            }
+            100% {
+                transform: translateX(-50%) scale(0) rotateY(-90deg);
+                opacity: 0;
+                filter: blur(10px);
+            }
+        }
+
+        @keyframes arrowPulse {
+            0%, 100% {
+                opacity: 0.6;
+                transform: translateX(-50%) translateY(0px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(3px);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        @keyframes plasma-shift {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(5px, 10px) rotate(90deg); }
+            50% { transform: translate(-5px, -10px) rotate(180deg); }
+            75% { transform: translate(10px, -5px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        @keyframes core-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        @keyframes roll-in-char {
+            0% {
+                opacity: 0;
+                transform: translateY(100%) rotateX(-90deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg);
+            }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--text-secondary); }
+        }
+
+        @keyframes meteor-fall {
+            0% {
+                transform: translate(0, -100px) rotate(225deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-600px, 600px) rotate(225deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes wave-motion {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         /* --- Navigation --- */
@@ -77,12 +199,6 @@
             animation: aurora-shift 4s ease-in-out infinite;
         }
 
-        @keyframes aurora-shift {
-            0% { background-position: 0% center; }
-            50% { background-position: 100% center; }
-            100% { background-position: 0% center; }
-        }
-
         .login-btn {
             padding: 10px 20px;
             background: var(--glass);
@@ -98,7 +214,7 @@
             border-color: var(--accent);
         }
 
-        /* --- Orb Section (updated) --- */
+        /* --- Orb Section --- */
         .orb-section {
             position: relative;
             width: 100vw;
@@ -111,13 +227,13 @@
 
         .ai-orb-container {
             position: relative;
-            top: auto;
             width: 80px;
             height: 80px;
             z-index: 2;
             cursor: pointer;
             transition: transform 0.2s;
         }
+
         .ai-orb-container:active {
             transform: scale(0.97);
         }
@@ -136,8 +252,8 @@
             font-weight: 500;
             pointer-events: none;
             z-index: 10;
-            animation: morphIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .popover::after {
@@ -151,33 +267,87 @@
             border-left: 6px solid transparent;
             border-right: 6px solid transparent;
             border-top: 6px solid rgba(0, 0, 0, 0.9);
+            animation: arrowPulse 1.5s ease-in-out infinite;
         }
 
-        .ai-orb-container:hover .popover {
-            animation: morphIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        .popover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background-size: 1000px 100%;
+            border-radius: 8px;
+            animation: shimmer 2s infinite;
+            pointer-events: none;
         }
 
-        @keyframes morphIn {
-            0% {
-                transform: translateX(-50%) scale(0);
-                opacity: 0;
-            }
-            100% {
-                transform: translateX(-50%) scale(1);
-                opacity: 1;
-            }
+        .popover.show {
+            animation: morphInAdvanced 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
+
+        .popover.hide {
+            animation: morphOut 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid #64d9ff;
+            z-index: 1;
+            animation: pulse-ring 3s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
+        }
+
+        .ring:nth-child(2) { animation-delay: 1s; }
+        .ring:nth-child(3) { animation-delay: 2s; }
 
         .ai-orb {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #64d9ff 40%, #00b8d4 100%);
-            animation: orb-pulse 3s infinite ease-in-out, rainbow-glow 6s infinite linear;
+            background: #3a7bd5; /* Lighter blue base */
+            animation: orb-pulse 3s infinite ease-in-out;
             position: relative;
             z-index: 2;
             box-shadow: 0 0 40px 10px rgba(100, 217, 255, 0.6);
             transition: box-shadow 0.3s;
+            overflow: hidden; /* Important for containing pseudo-elements */
+        }
+
+        .ai-orb::before, .ai-orb::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        /* Inner glowing core */
+        .ai-orb::before {
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(173, 216, 230, 0.5) 60%, transparent 100%);
+            filter: blur(10px);
+            animation: core-pulse 4s ease-in-out infinite;
+        }
+
+        /* Shifting plasma/haze layer */
+        .ai-orb::after {
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            background: radial-gradient(circle at 30% 40%, #89f7fe 10%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, #66a6ff 10%, transparent 50%);
+            filter: blur(15px);
+            opacity: 0.8; /* Increased opacity */
+            animation: plasma-shift 8s ease-in-out infinite;
         }
 
         .ai-orb:hover {
@@ -189,55 +359,7 @@
             animation: orb-pulse 3s infinite ease-in-out, rainbow-glow-active 3s infinite linear;
         }
 
-        @keyframes orb-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-        }
-
-        @keyframes rainbow-glow {
-            0% { box-shadow: 0 0 40px 10px rgba(255, 0, 127, 0.6); }
-            16.66% { box-shadow: 0 0 40px 10px rgba(255, 0, 255, 0.6); }
-            33.33% { box-shadow: 0 0 40px 10px rgba(0, 127, 255, 0.6); }
-            50% { box-shadow: 0 0 40px 10px rgba(0, 255, 127, 0.6); }
-            66.66% { box-shadow: 0 0 40px 10px rgba(255, 255, 0, 0.6); }
-            83.33% { box-shadow: 0 0 40px 10px rgba(255, 127, 0, 0.6); }
-            100% { box-shadow: 0 0 40px 10px rgba(255, 0, 127, 0.6); }
-        }
-
-        @keyframes rainbow-glow-active {
-            0% { box-shadow: 0 0 60px 20px rgba(255, 0, 127, 0.9); }
-            16.66% { box-shadow: 0 0 60px 20px rgba(255, 0, 255, 0.9); }
-            33.33% { box-shadow: 0 0 60px 20px rgba(0, 127, 255, 0.9); }
-            50% { box-shadow: 0 0 60px 20px rgba(0, 255, 127, 0.9); }
-            66.66% { box-shadow: 0 0 60px 20px rgba(255, 255, 0, 0.9); }
-            83.33% { box-shadow: 0 0 60px 20px rgba(255, 127, 0, 0.9); }
-            100% { box-shadow: 0 0 60px 20px rgba(255, 0, 127, 0.9); }
-        }
-
-        /* ...existing code for .ring ... */
-        .ring {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            border: 2px solid #64d9ff;
-            z-index: 1;
-            animation: pulse-ring 3s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955), rainbow-ring 6s infinite linear;
-        }
-        .ring:nth-child(2) { animation-delay: 1s; }
-        .ring:nth-child(3) { animation-delay: 2s; }
-
-        @keyframes rainbow-ring {
-            0% { border-color: rgba(255, 0, 127, 0.8); }
-            16.66% { border-color: rgba(255, 0, 255, 0.8); }
-            33.33% { border-color: rgba(0, 127, 255, 0.8); }
-            50% { border-color: rgba(0, 255, 127, 0.8); }
-            66.66% { border-color: rgba(255, 255, 0, 0.8); }
-            83.33% { border-color: rgba(255, 127, 0, 0.8); }
-            100% { border-color: rgba(255, 0, 127, 0.8); }
-        }
-
-        /* --- Hero Section (updated) --- */
+        /* --- Hero Section --- */
         .hero {
             min-height: auto;
             display: flex;
@@ -249,49 +371,163 @@
             position: relative;
             margin-top: 0;
         }
+
         .hero h1 {
             font-size: clamp(2rem, 5vw, 4rem);
             margin-bottom: 20px;
             line-height: 1.2;
-            animation: fade-in-up 1s ease-out;
+            /* animation: fade-in-up 1s ease-out; */ /* Replaced by character animation */
+            perspective: 400px; /* Add perspective for 3D rotation */
         }
+
+        .hero h1 .char {
+            display: inline-block;
+            opacity: 0;
+            animation: roll-in-char 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
         .hero p {
             font-size: 1.1rem;
             color: var(--text-secondary);
             max-width: 600px;
             margin-bottom: 40px;
-            animation: fade-in-up 1s ease-out 0.3s backwards;
+            /* animation: fade-in-up 1s ease-out 0.3s backwards; */ /* Replaced by typing animation */
+        }
+
+        .typing-line {
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: .15em solid var(--text-secondary);
+            width: 0;
         }
 
         /* --- Easter Egg Section --- */
         .easter-egg-section {
             padding: 60px 20px;
-            text-align: center;
         }
 
-        .card {
+        .interactive-card {
             background: var(--glass);
-            border: 1px solid var(--glass-border);
+            border: 1px solid transparent;
             padding: 40px;
             border-radius: 20px;
-            max-width: 400px;
+            max-width: 500px;
             margin: 0 auto;
-            cursor: pointer;
-            transition: 0.3s;
+            transition: border-color 0.3s ease;
         }
 
-        .card:hover {
+        .interactive-card:hover {
             border-color: var(--accent);
+        }
+
+        .draw-container {
+            position: relative;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .draw-text {
+            position: absolute;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .draw-text.static {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            opacity: 1;
+        }
+
+        .draw-text.animated {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: transparent; /* Hide base text, show only the drawing */
+            opacity: 0;
+        }
+
+        .draw-text.animated::before {
+            content: "It's You, You're the MVP";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #FF0080, #7928CA, #0070F3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-mask-image: linear-gradient(to left, transparent 25%, black 75%);
+            mask-image: linear-gradient(to left, transparent 25%, black 75%);
+            -webkit-mask-size: 400% 100%;
+            mask-size: 400% 100%;
+            -webkit-mask-position: 100% 0;
+            mask-position: 100% 0;
+            transition: mask-position 1s ease-in-out;
+        }
+
+        .draw-container:hover .draw-text.static {
+            opacity: 0;
+        }
+
+        .draw-container:hover .draw-text.animated {
+            opacity: 1;
+        }
+
+        .draw-container:hover .draw-text.animated::before {
+            -webkit-mask-position: 0% 0;
+            mask-position: 0% 0;
         }
 
         /* --- Footer --- */
         footer {
-            padding: 40px 20px;
+            position: relative;
+            padding: 120px 20px 40px 20px;
             text-align: center;
             color: var(--text-secondary);
             font-size: 0.8rem;
-            border-top: 1px solid var(--glass-border);
-            background: #f9f9f9;
+            background: #f0f2f5;
+            overflow: hidden;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .waves-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+        }
+
+        .waves-parallax > use {
+            animation: wave-motion 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+        }
+        .waves-parallax > use:nth-child(1) {
+            animation-delay: -2s;
+            animation-duration: 7s;
+            fill: rgba(109, 40, 217, 0.7);
+        }
+        .waves-parallax > use:nth-child(2) {
+            animation-delay: -3s;
+            animation-duration: 10s;
+            fill: rgba(109, 40, 217, 0.5);
+        }
+        .waves-parallax > use:nth-child(3) {
+            animation-delay: -4s;
+            animation-duration: 13s;
+            fill: rgba(109, 40, 217, 0.3);
+        }
+        .waves-parallax > use:nth-child(4) {
+            animation-delay: -5s;
+            animation-duration: 20s;
+            fill: rgba(109, 40, 217, 0.2);
         }
 
         .footer-links a {
@@ -300,42 +536,106 @@
             margin: 0 10px;
             transition: color 0.3s;
         }
-        .footer-links a:hover { color: var(--accent-glow); }
+
+        .footer-links a:hover {
+            color: var(--accent-glow);
+        }
 
         /* --- Modal/Overlay --- */
         .modal {
             position: fixed;
-            top: 50%; left: 50%;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
-            background: #1a1a1a;
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid var(--accent);
+            background: var(--bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
             text-align: center;
             z-index: 1000;
             display: none;
-            box-shadow: 0 0 50px rgba(109, 40, 217, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+            overflow: hidden;
         }
+
         .overlay {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
             z-index: 999;
             display: none;
         }
 
+        .modal h2 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: 2rem;
+            background: linear-gradient(180deg, #111, #888);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 2;
+        }
+
+        .modal p {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        .modal button {
+            padding: 10px 24px;
+            background: #f0f0f0;
+            border: 1px solid #e0e0e0;
+            color: var(--text-secondary);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+        }
+
+        .modal button:hover {
+            background: #e8e8e8;
+            border-color: #d0d0d0;
+        }
+
+        .meteor {
+            position: absolute;
+            width: 2px;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent);
+            top: 0;
+            left: 0;
+            animation: meteor-fall 5s linear infinite;
+        }
+
+        .meteor:nth-child(1) { left: 20%; animation-delay: 0s; }
+        .meteor:nth-child(2) { left: 80%; animation-delay: -1.5s; }
+        .meteor:nth-child(3) { left: 50%; animation-delay: -3s; }
+        .meteor:nth-child(4) { left: 100%; animation-delay: -4s; }
+        .meteor:nth-child(5) { left: 0%; animation-delay: -0.5s; }
+
     </style>
 </head>
 <body>
-
     <nav>
         <div class="logo">Friend.ai</div>
         <button class="login-btn" id="loginBtn">Login</button>
     </nav>
 
     <div class="hero">
-        <h1>Your digital shoulder<br>to lean on.</h1>
-        <p>Busy with life? Finished school, college, switched companies? <br>Nobody to talk to? Don't worry, I am here buddy.</p>
+        <h1 id="hero-title">Your digital shoulder<br>to lean on.</h1>
+        <p id="hero-subtitle">Busy with life? Finished school, college, switched companies? <br>Nobody to talk to? Don't worry, I am here buddy.</p>
     </div>
 
     <div class="orb-section">
@@ -348,86 +648,165 @@
     </div>
 
     <div class="easter-egg-section">
-        <div class="card" id="userCard">
-            <h3>See who uses Friend.ai</h3>
-            <p style="margin-top: 10px; color: #888;">Tap to reveal the top influencers and great minds utilizing our tech.</p>
+        <div class="interactive-card">
+            <div class="draw-container">
+                <div class="draw-text static">See who uses Friend.ai</div>
+                <div class="draw-text animated">It's You, You're the MVP</div>
+            </div>
         </div>
     </div>
+
     <footer>
-    <footer> class="footer-links">
-        <div class="footer-links"></a>
-            <a href="#">Contact Us</a>ions</a>
-            <a href="#">Terms & Conditions</a>
-            <a href="#">Privacy Policy</a>
-        </div>le="margin-top: 20px;">&copy; 2024 Friend.ai. All rights reserved.</p>
-        <p style="margin-top: 20px;">&copy; 2024 Friend.ai. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="javascript:void(0);" id="contactLink">Contact Us</a>
+                <a href="javascript:void(0);" id="termsLink">Terms & Conditions</a>
+                <a href="javascript:void(0);" id="privacyLink">Privacy Policy</a>
+            </div>
+            <p style="margin-top: 20px;">&copy; 2024 Friend.ai. All rights reserved.</p>
+        </div>
+        <div class="waves-container">
+            <svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="waves-parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" />
+                </g>
+            </svg>
+        </div>
     </footer>
-    <div class="overlay" id="overlay"></div>
+
     <div class="overlay" id="overlay"></div>
     <div class="modal" id="msgModal">
-        <h2 id="modalTitle"></h2>margin-top: 10px; color: #ccc;"></p>
-        <p id="modalBody" style="margin-top: 10px; color: #ccc;"></p>ng: 8px 16px; background: var(--accent); border: none; color: white; border-radius: 5px; cursor: pointer;">Got it</button>
-        <button onclick="closeModal()" style="margin-top: 20px; padding: 8px 16px; background: var(--accent); border: none; color: white; border-radius: 5px; cursor: pointer;">Got it</button>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <h2 id="modalTitle"></h2>
+        <p id="modalBody"></p>
+        <button onclick="closeModal()">Got it</button>
     </div>
+
     <script>
-    <script>-- Orb Click Logic ---
-        // --- Orb Click Logic ---tElementById('orbBtn');
+        // --- Hero Text Animation ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Title Animation
+            const heroTitle = document.getElementById('hero-title');
+            const originalHTML = heroTitle.innerHTML;
+            const lines = originalHTML.split('<br>');
+
+            heroTitle.innerHTML = ''; // Clear the original content
+
+            let totalChars = 0;
+            lines.forEach((line, lineIndex) => {
+                const chars = line.split('');
+                chars.forEach((char, charIndex) => {
+                    const span = document.createElement('span');
+                    span.className = 'char';
+                    span.innerHTML = char === ' ' ? '&nbsp;' : char; // Use non-breaking space
+                    
+                    const staggerDelay = 0.03;
+                    span.style.animationDelay = `${(totalChars + charIndex) * staggerDelay}s`;
+                    
+                    heroTitle.appendChild(span);
+                });
+                totalChars += chars.length;
+
+                if (lineIndex < lines.length - 1) {
+                    heroTitle.appendChild(document.createElement('br'));
+                }
+            });
+
+            // Subtitle Typing Animation
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            const subtitleLines = heroSubtitle.innerHTML.split('<br>').map(line => line.trim());
+            heroSubtitle.innerHTML = ''; // Clear original content
+            
+            let typingDelay = (totalChars * 0.03) + 0.5; // Start after title animation
+            const typingSpeed = 0.05; // Time per character
+
+            subtitleLines.forEach(line => {
+                const lineDiv = document.createElement('div');
+                lineDiv.className = 'typing-line';
+                lineDiv.textContent = line;
+                
+                const typingDuration = line.length * typingSpeed;
+                const blinkDuration = 0.75;
+                const blinkCount = Math.ceil(typingDuration / blinkDuration);
+                
+                lineDiv.style.animation = `
+                    typing ${typingDuration}s steps(${line.length}, end) forwards,
+                    blink-caret ${blinkDuration}s step-end ${blinkCount}
+                `;
+                lineDiv.style.animationDelay = `${typingDelay}s`;
+
+                heroSubtitle.appendChild(lineDiv);
+                typingDelay += typingDuration + 0.5; // Add delay for next line
+            });
+        });
+
+        // --- Orb Click Logic ---
         const orbBtn = document.getElementById('orbBtn');
         const aiOrb = document.getElementById('aiOrb');
+        const popover = document.querySelector('.popover');
         let orbActive = false;
+
         orbBtn.addEventListener('click', () => {
-        orbBtn.addEventListener('click', () => {
-            orbActive = !orbActive;'active', orbActive);
-            aiOrb.classList.toggle('active', orbActive);logic
-            // Here you would trigger your speech agent logic
-            // For demo, just toggle animation
+            orbActive = !orbActive;
+            aiOrb.classList.toggle('active', orbActive);
+            
+            if (orbActive) {
+                popover.classList.remove('hide');
+                popover.classList.add('show');
+            } else {
+                popover.classList.remove('show');
+                popover.classList.add('hide');
+            }
         });
-        // --- 3. Easter Eggs ---
-        // --- 3. Easter Eggs ---
-        // Login Egg
-        // Login EggElementById('loginBtn').addEventListener('click', () => {
-        document.getElementById('loginBtn').addEventListener('click', () => {er-free friendship. Come on in!");
+
+        // --- Login Egg ---
+        document.getElementById('loginBtn').addEventListener('click', () => {
             showModal("JK! 😄", "You don't need to login. We believe in barrier-free friendship. Come on in!");
         });
-        // "Great People" Egg
-        // "Great People" Eggment.getElementById('userCard');
-        const userCard = document.getElementById('userCard');
-        userCard.addEventListener('click', () => { rotate(2deg)";
-            userCard.style.transform = "scale(1.1) rotate(2deg)";
-            userCard.style.borderColor = "#fff";
-            userCard.innerHTML = `ze: 3rem;">🫵 IT'S YOU!</h1>
-                <h1 style="font-size: 3rem;">🫵 IT'S YOU!</h1>'re the MVP.</p>
-                <p style="color: white; margin-top: 10px;">You're the MVP.</p>
-            `; Reset after 3 seconds
-            // Reset after 3 seconds
-            setTimeout(() => {.transform = "scale(1) rotate(0deg)";
-                userCard.style.transform = "scale(1) rotate(0deg)";";
-                userCard.style.borderColor = "rgba(255,255,255,0.1)";
-                userCard.innerHTML = `riend.ai</h3>
-                    <h3>See who uses Friend.ai</h3>
-                `;
-            }, 3000);
+
+        // --- Footer Links ---
+        document.getElementById('contactLink').addEventListener('click', () => {
+            showModal("Contact Us", "For any inquiries, please email us at hello@friend.ai. We'd love to hear from you!");
         });
 
-        // --- Utilities ---
-        // --- Utilities ---        const overlay = document.getElementById('overlay');
-        const overlay = document.getElementById('overlay');nt.getElementById('msgModal');
-        const modal = document.getElementById('msgModal');tle');
-        const modalTitle = document.getElementById('modalTitle');dy');
+        document.getElementById('termsLink').addEventListener('click', () => {
+            showModal("Terms & Conditions", "By using Friend.ai, you agree to be a good friend. No gossiping. All conversations are confidential. These terms are governed by the laws of friendship.");
+        });
+
+        document.getElementById('privacyLink').addEventListener('click', () => {
+            showModal("Privacy Policy", "Your secrets are safe with us. We do not store, share, or sell any of your personal data or conversations. Your privacy is our top priority.");
+        });
+
+        // --- Modal Utilities ---
+        const overlay = document.getElementById('overlay');
+        const modal = document.getElementById('msgModal');
+        const modalTitle = document.getElementById('modalTitle');
         const modalBody = document.getElementById('modalBody');
 
-        function showModal(title, body) {            modalTitle.innerText = title;
+        function showModal(title, body) {
             modalTitle.innerText = title;
-            modalBody.innerText = body;k';
-            overlay.style.display = 'block';k';
+            modalBody.innerText = body;
+            overlay.style.display = 'block';
             modal.style.display = 'block';
         }
-unction closeModal() {
-        function closeModal() {            overlay.style.display = 'none';
-            overlay.style.display = 'none'; = 'none';
+
+        function closeModal() {
+            overlay.style.display = 'none';
             modal.style.display = 'none';
         }
-verlay.addEventListener('click', closeModal);
-        overlay.addEventListener('click', closeModal);    </script>
+
+        overlay.addEventListener('click', closeModal);
     </script>
-</body></html>
+</body>
+</html>
