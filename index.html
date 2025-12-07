@@ -136,11 +136,6 @@
             50% { transform: scale(1.2); opacity: 1; }
         }
 
-        @keyframes kaleidoscope-spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
         @keyframes roll-in-char {
             0% {
                 opacity: 0;
@@ -206,9 +201,9 @@
 
         .login-btn {
             padding: 10px 20px;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            color: white;
+            background: #000000;
+            border: 1px solid #000000;
+            color: #ffffff;
             border-radius: 20px;
             cursor: pointer;
             transition: 0.3s;
@@ -316,57 +311,51 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: #000;
+            background: #3a7bd5; /* Lighter blue base */
             animation: orb-pulse 3s infinite ease-in-out;
             position: relative;
             z-index: 2;
-            box-shadow: 0 0 40px 10px rgba(121, 40, 202, 0.6);
+            box-shadow: 0 0 40px 10px rgba(100, 217, 255, 0.6);
             transition: box-shadow 0.3s;
-            overflow: hidden;
+            overflow: hidden; /* Important for containing pseudo-elements */
         }
 
         .ai-orb::before, .ai-orb::after {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 200%;
-            height: 200%;
-            border-radius: 40%;
+            border-radius: 50%;
         }
 
+        /* Inner glowing core */
         .ai-orb::before {
-            background: repeating-conic-gradient(
-                from 0deg,
-                #ff0080 0deg 20deg,
-                #7928ca 20deg 40deg,
-                #0070f3 40deg 60deg,
-                #00ffcc 60deg 80deg,
-                #ff0080 80deg 100deg
-            );
-            mix-blend-mode: screen;
-            animation: kaleidoscope-spin 10s linear infinite;
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(173, 216, 230, 0.5) 60%, transparent 100%);
+            filter: blur(10px);
+            animation: core-pulse 4s ease-in-out infinite;
         }
 
+        /* Shifting plasma/haze layer */
         .ai-orb::after {
-            background: repeating-conic-gradient(
-                from 0deg,
-                #00ffcc 0deg 20deg,
-                #0070f3 20deg 40deg,
-                #7928ca 40deg 60deg,
-                #ff0080 60deg 80deg,
-                #00ffcc 80deg 100deg
-            );
-            mix-blend-mode: overlay;
-            animation: kaleidoscope-spin 15s linear infinite reverse;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            background: radial-gradient(circle at 30% 40%, #89f7fe 10%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, #66a6ff 10%, transparent 50%);
+            filter: blur(15px);
+            opacity: 0.8; /* Increased opacity */
+            animation: plasma-shift 8s ease-in-out infinite;
         }
 
         .ai-orb:hover {
-            box-shadow: 0 0 60px 20px rgba(121, 40, 202, 0.8);
+            box-shadow: 0 0 50px 15px rgba(100, 217, 255, 0.8);
         }
 
         .ai-orb.active {
-            box-shadow: 0 0 70px 25px rgba(121, 40, 202, 0.9);
+            box-shadow: 0 0 60px 20px rgba(100, 217, 255, 0.9);
             animation: orb-pulse 3s infinite ease-in-out, rainbow-glow-active 3s infinite linear;
         }
 
@@ -491,6 +480,55 @@
         .draw-container:hover .draw-text.animated::before {
             -webkit-mask-position: 0% 0;
             mask-position: 0% 0;
+        }
+
+        /* --- Meme Section --- */
+        .meme-section {
+            margin-top: 80px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .meme-text {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+            max-width: 600px;
+            line-height: 1.4;
+        }
+
+        .halftone-container {
+            position: relative;
+            width: 300px;
+            height: auto;
+            min-height: 300px; /* Ensure it takes space */
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: #f0f0f0; /* Fallback background */
+        }
+
+        .halftone-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(100%) contrast(1.5) brightness(1.1);
+        }
+
+        .halftone-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, #000 1.5px, transparent 2px);
+            background-size: 5px 5px;
+            mix-blend-mode: overlay;
+            opacity: 0.8;
         }
 
         /* --- Footer --- */
@@ -663,6 +701,13 @@
             <div class="draw-container">
                 <div class="draw-text static">See who uses Friend.ai</div>
                 <div class="draw-text animated">It's You, You're the MVP</div>
+            </div>
+        </div>
+
+        <div class="meme-section">
+            <div class="meme-text">With Great Power comes 3.6 roentgen, not great, not terrible</div>
+            <div class="halftone-container">
+                <img src="https://i.kym-cdn.com/entries/icons/original/000/037/634/willem_dafoe_looking_up.jpg" alt="Willem Dafoe Looking Up">
             </div>
         </div>
     </div>
